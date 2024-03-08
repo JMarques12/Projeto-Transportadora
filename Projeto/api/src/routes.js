@@ -11,4 +11,7 @@ routes.get('/', (req, res) => {
 
 routes.get('/clientes', Cliente.getClientes);
 routes.get('/funcionario', funcionario.getfuncionario);
+routes.get('/entrega', entrega.getentrega);
+routes.get('/pedido', pedido.getpedido);
+routes.get('/rota', rota.getrota);
 module.exports = routes;
