@@ -4,7 +4,7 @@ const con = require('../connection/mysql');
 const addpedido = (req, res) => {
     if(req.body!=null && req.body.idpedido!=null && req.body.idcliente!=null &&  req.body.identrega!=null!=null &&  req.body.datapedido!=null &&  req.body.valor){
         const { idpedido, idcliente, identrega, datapedido, valor } = req.body;
-        con.query('INSERT INTO pedidos (idpedido, idcliente, identrega, datapedido, valor) VALUES (?, ?,?,?,?)', [nidpedido, idcliente, identrega, datapedido, valor], (err, result) => {
+        con.query('INSERT INTO pedido (idpedido, idcliente, identrega, datapedido, valor) VALUES (?, ?,?,?,?)', [nidpedido, idcliente, identrega, datapedido, valor], (err, result) => {
             if (err) {
                 res.status(500).send('Erro ao adicionar pedido');
             }
@@ -17,14 +17,14 @@ const addpedido = (req, res) => {
 //CRUD - READ
 const getpedido = (req, res) => {
     if (req.params.idcliente != null) {
-        con.query(`SELECT * FROM pedidos WHERE func = '${req.params.idcliente}'`, (err, result) => {
+        con.query(`SELECT * FROM pedido WHERE func = '${req.params.idcliente}'`, (err, result) => {
             if (err) {
                 res.status(500).send('Erro ao listar pedido');
             }
             res.json(result);
         });
     } else {
-        con.query('SELECT * FROM pedidos', (err, result) => {
+        con.query('SELECT * FROM pedido', (err, result) => {
             if (err) {
                 res.status(500).send('Erro ao listar pedido');
             }
@@ -37,7 +37,7 @@ const getpedido = (req, res) => {
 const updatepedido = (req, res) => {
     if(req.body!=null && req.body.idpedido!=null && req.body.idcliente!=null &&  req.body.identrega!=null!=null &&  req.body.datapedido!=null &&  req.body.valor){
         const { idpedido, idcliente, identrega, datapedido, valor } = req.body;
-        con.query('UPDATE pedidos SET idpedido = ?, idcliente = ?,identrega = ?,datapedido = ?,  WHERE valor = ?', [idpedido, idcliente, identrega, datapedido, valor], (err, result) => {
+        con.query('UPDATE pedido SET idpedido = ?, idcliente = ?,identrega = ?,datapedido = ?,  WHERE valor = ?', [idpedido, idcliente, identrega, datapedido, valor], (err, result) => {
             if (err) {
                 res.status(500).json(err);
             } else {
@@ -52,7 +52,7 @@ const updatepedido = (req, res) => {
 //CRUD - DELETE
 const deletepedido = (req, res) => {
     if (req.params.idcliente!= null) {
-        con.query(`DELETE FROM pedidos WHERE func = '${req.params.idcliente}'`, (err, result) => {
+        con.query(`DELETE FROM pedido WHERE func = '${req.params.idcliente}'`, (err, result) => {
             if (err) {
                 res.status(500).json(err);
             } else {

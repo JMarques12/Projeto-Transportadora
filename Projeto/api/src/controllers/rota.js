@@ -4,7 +4,7 @@ const con = require('../connection/mysql');
 const addrota = (req, res) => {
     if(req.body!=null && req.body.idrota!=null && req.body.origem!=null &&  req.body.pedido!=null!=null &&  req.body.distancia){
         const { idrota, origem, pedido, distancia } = req.body;
-        con.query('INSERT INTO rotas (idrota, origem, pedido, distancia) VALUES (?, ?,?,?)', [idrota, origem, pedido, distancia], (err, result) => {
+        con.query('INSERT INTO rota (idrota, origem, pedido, distancia) VALUES (?, ?,?,?)', [idrota, origem, pedido, distancia], (err, result) => {
             if (err) {
                 res.status(500).send('Erro ao adicionar rota');
             }
@@ -17,16 +17,17 @@ const addrota = (req, res) => {
 //CRUD - READ
 const getrota = (req, res) => {
     if (req.params.origem != null) {
-        con.query(`SELECT * FROM rotas WHERE func = '${req.params.origem}'`, (err, result) => {
+        con.query(`SELECT * FROM rota WHERE func = '${req.params.origem}'`, (err, result) => {
             if (err) {
-                res.status(500).send('Erro ao listar rota');
+                res.status(500).json(err).end();
             }
             res.json(result);
         });
     } else {
-        con.query('SELECT * FROM rotas', (err, result) => {
+        con.query('SELECT * FROM rota', (err, result) => {
             if (err) {
-                res.status(500).send('Erro ao listar rota');
+                // res.status(500).send('Erro ao listar rota');
+                res.status(500).json(err).end();
             }
             res.json(result);
         });
@@ -52,7 +53,7 @@ const updaterota = (req, res) => {
 //CRUD - DELETE
 const deleterota = (req, res) => {
     if (req.params.origem!= null) {
-        con.query(`DELETE FROM rotas WHERE func = '${req.params.origem}'`, (err, result) => {
+        con.query(`DELETE FROM rota WHERE func = '${req.params.origem}'`, (err, result) => {
             if (err) {
                 res.status(500).json(err);
             } else {
