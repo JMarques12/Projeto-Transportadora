@@ -4,6 +4,7 @@ const routes = express.Router();
 const Cliente = require('./controllers/cliente');
 const funcionario = require('./controllers/funcionario');
 const veiculos = require('./controllers/veiculo');
+const entrega = require('./controllers/entrega');
 
 routes.get('/', (req, res) => {
     res.json("API Transportadora")
